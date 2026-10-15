@@ -1,168 +1,94 @@
-<div id="top"></div>
+# 哮天犬 (XiaoTianQuan / XTQ)
 
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-    <a href="https://github.com/NgoQuocBao1010/Exercise-Correction">
-        <img src="./images/logo.png" alt="Logo" width="60%">
-    </a>
+> 🐕 你的数字关节保镖 —— 基于AI视觉的个性化运动防伤评估引擎
 
-  <h2 align="center">Exercise Pose Correction</h2>
+## 项目简介
 
-  <p align="center">
-    Make use of the power of Mediapipe’s pose detection, this project is built in order to analyze, detect and classifying the forms of fitness exercises.
-  </p>
-</div>
+**哮天犬**是一个开源的运动防伤AI评估引擎，基于人体姿态识别技术，实时分析用户动作中的关节异常受力风险，提供个性化安全预警。
 
-<!-- ABOUT THE PROJECT -->
+不同于传统健身App的"计数打卡"逻辑，哮天犬首次将"关节级安全评估"作为核心功能，填补了大众健身领域"防伤预警"的市场空白。
 
-## About The Project
+### 核心能力
 
-This project goal is to develop 4 machine learning models for 4 of the most home exercises **(Bicep Curl, Plank, Squat and Lunge)** which each model can detect any form of incorrect movement while a person is performing a correspond exercise. In addition, a web application that utilize the trained models, will be built in other to analyze and provide feedbacks on workout videos.
+- 🛡️ **实时防伤预警** —— 基于生物力学参数，实时评估关节异常受力程度
+- 👤 **个性化安全基线** —— 根据用户损伤史，动态调整安全阈值，实现"一人一策"
+- 📊 **关节健康趋势报告** —— 记录30天内关节稳定度趋势，预警慢性劳损风险
 
-Here are some detections of the exercises:
-
--   Bicep Curl
-<p align="center"><img src="images/bicep_curl.gif" alt="Logo" width="70%"></p>
-
--   Basic Plank
-<p align="center"><img src="images/plank.gif" alt="Logo" width="70%"></p>
-
--   Basic Squat
-<p align="center"><img src="images/squat.gif" alt="Logo" width="70%"></p>
-
--   Lunge
-<p align="center"><img src="images/lunge.gif" alt="Logo" width="70%"></p>
-
--   Models' evaluation results and website screenshots [here](#usage)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-### Built With
-
-1. For data processing and model training
-
-    - [Numpy](https://numpy.org/)
-    - [Pandas](https://pandas.pydata.org/)
-    - [Sklearn](https://scikit-learn.org/stable/)
-    - [Keras](https://keras.io/)
-
-1. For building website
-
-    - [Vue.js v3](https://vuejs.org/)
-    - [Django](https://www.djangoproject.com/)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-## Dataset
-
-Due to the lack of videos or dataset online that recorded human doing exercises both in a proper or improper way, the majority of self-collected videos were either recorded by myself, my friends or my family. The majority of the collected videos were removed due to privacy purpose.
-
-With an exercise such as Plank, as there is not much movement during the exercise, I’m able to find a dataset from an open database from [Kaggle](https://www.kaggle.com/datasets/niharika41298/yoga-poses-dataset). The found dataset is about many yoga poses but the very well-known ones are the downward dog pose, goddess pose, tree pose, plank pose and the warrior pose. The dataset contains 5 folders for 5 poses, each folder contains images of people correctly doing the correspond pose.
-
-For the purpose of this thesis, only the folder contains the images of people properly doing plank is chosen. There are 266 image files in that folder, I handpicked all the images that represent a basic plank and discard the reset. In conclusion, there are 30 images which are arranged to the proper form class for basic plank.
-
-## Getting Started
-
-This is an example of how you may give instructions on setting up the project locally.
-
-#### Setting Up Environment
+### 技术架构
 
 ```
-    Python 3.8.13
-    Node 17.8.0
-    NPM 8.5.5
-    OS: Linux or MacOS
+┌─────────────────────────────────────────┐
+│           第三层：应用层（用户交互）        │
+│    实时预警弹窗 / 趋势报告 / 个性化方案     │
+├─────────────────────────────────────────┤
+│         第二层：自研核心（哮天犬引擎）       │
+│  防伤规则引擎 / 个性化阈值系统 / 趋势分析    │
+├─────────────────────────────────────────┤
+│         第一层：开源层（骨架识别）          │
+│   MediaPipe Pose / 32个骨骼关键点三维坐标   │
+└─────────────────────────────────────────┘
 ```
 
-```markdown
-    NOTES
-    ⚠️ Commands/Scripts for this project are wrote for Linux-based OS. They may not work on Windows machines.
+## 支持动作
+
+| 动作 | 状态 | 监测指标数 | 关联损伤风险 |
+|------|------|-----------|-------------|
+| 深蹲 (Squat) | ✅ V1.0 | 15项 | 半月板损伤、髌股关节综合征、前交叉韧带损伤 |
+| 硬拉 (Deadlift) | 🚧 开发中 | 规划12项 | 腰椎间盘突出、腰背劳损 |
+| 卧推 (Bench Press) | 🚧 开发中 | 规划10项 | 肩峰撞击综合征、肘关节韧带损伤 |
+
+## 快速开始
+
+### 安装依赖
+
+```bash
+pip install -r requirements.txt
 ```
 
-### Installation
+### 运行Demo
 
-_If you only want to try the website, look [here](./web/README.md)._
+```bash
+python examples/demo_squat.py
+```
 
-1. Clone the repo and change directory to that folder
+## 防伤规则引擎
 
-    ```sh
-    git clone https://github.com/NgoQuocBao1010/Exercise-Correction.git
-    ```
+规则库的知识来源：
+- PubMed、知网等学术数据库中的生物力学与运动康复文献
+- 运动康复临床指南和关节活动度国际标准
+- 经运动科学专业教师和临床护理医师双重审核
 
-1. Install all project dependencies
+### 深蹲防伤规则示例
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+| 监测指标 | 安全范围 | 注意范围 | 警告范围 | 关联损伤风险 |
+|---------|---------|---------|---------|-------------|
+| 膝关节屈曲角 | 80°-120° | 120°-135°或60°-80° | >135°或<60° | 半月板后角挤压、髌股关节压力增大 |
+| 膝-踝联动偏移 | <10° | 10°-20° | >20° | 髌股关节综合征、前交叉韧带损伤 |
+| 躯干前倾角 | 30°-50° | 50°-65°或20°-30° | >65°或<20° | 腰椎间盘压力增大、下背部劳损 |
 
-1. Folder **_[core](./core/README.md)_** is the code for data processing and model training.
-1. Folder **_[web](./web/README.md)_** is the code for website.
+## 个性化阈值系统
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+用户首次使用时填写个人损伤史，系统自动调整专属安全阈值：
 
-<!-- USAGE EXAMPLES -->
-<div id="Usage"></div>
-<br/>
+| 用户损伤史 | 涉及动作 | 标准阈值 | 个性化阈值 | 调整依据 |
+|-----------|---------|---------|-----------|----------|
+| 半月板术后（<6个月） | 深蹲 | 膝关节屈曲≤130° | 膝关节屈曲≤90° | 术后康复指南：避免深度屈膝 |
+| 前交叉韧带重建术后 | 深蹲 | 膝-踝偏移<10° | 膝-踝偏移<5° | 移植物保护 |
+| 腰椎间盘突出 | 硬拉 | 腰椎屈曲≤58° | 腰椎屈曲≤40° | 腰椎负荷研究（L4-L5/L5-S1） |
 
-## Usage
+## 开源说明
 
-As the introduction indicated, there are 2 purposes for this project.
+本项目基于 [Exercise-Correction](https://github.com/NgoQuocBao1010/Exercise-Correction)（MIT License）进行二次开发，保留原作者版权声明。
 
-1. Model training **(describe in depth [here](core/README.md))**. Below are the evaluation results for each models.
+- **骨架识别层**：基于 MediaPipe Pose（Apache 2.0 License）
+- **防伤规则引擎**：哮天犬团队原创，MIT License 开源
 
-    - [Bicep Curl](core/bicep_model/README.md) - _lean back error_: Confusion Matrix - ROC curve
-      | <img align="center" alt="Bicep Curl evaluation" src="images/bicep_curl_eval.png" /> | <img align="center" alt="NgoQuocBao's Top Languages" src="images/bicep_curl_eval_2.png" /> |
-      | ------------- | ------------- |
-    - [Plank](core/plank_model/README.md) - _all errors_: Confusion Matrix - ROC curve
-      | <img align="center" alt="Plank evaluation" src="images/plank_eval.png" /> | <img align="center" alt="NgoQuocBao's Top Languages" src="images/plank_eval_2.png" /> |
-      | ------------- | ------------- |
-    - [Basic Squat](core/squat_model/README.md) - _stage_: Confusion Matrix - ROC curve
-      | <img align="center" alt="Squat evaluation" src="images/squat_eval.png" /> | <img align="center" alt="NgoQuocBao's Top Languages" src="images/squat_eval_2.png" /> |
-      | ------------- | ------------- |
-    - [Lunge](core/lunge_model/README.md) - _knee over toe error_: Confusion Matrix - ROC curve
-      | <img align="center" alt="Lunge evaluation" src="images/lunge_eval.png" /> | <img align="center" alt="NgoQuocBao's Top Languages" src="images/lunge_eval_2.png" /> |
-      | ------------- | ------------- |
+## 团队
 
-1. Website for exercise detection. This web is for demonstration purpose of all the trained models, therefore, at the moment there are only 1 main features: Analyzing and giving feedbacks on user's exercise video.
- <p align="center"><img src="images/web_1.png" alt="Logo" width="70%"></p>
- <p align="center"><img src="images/web_2.png" alt="Logo" width="70%"></p>
- <p align="center"><img src="images/web_3.png" alt="Logo" width="70%"></p>
- <p align="center"><img src="images/web_4.png" alt="Logo" width="70%"></p>
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- CONTRIBUTING -->
-
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- LICENSE -->
+- 项目：护动智眸 —— 基于AI视觉的个性化运动防伤评估系统
+- 赛道：互联网+大学生创新计划 · 职教赛道创意组
+- 学校：合肥幼儿师范高等专科学校
 
 ## License
 
-Distributed under the MIT License.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
-
-## Acknowledgments
-
--   Here are some other projects which I get inspired from: [Pose Trainer](https://github.com/stevenzchen/pose-trainer), [Deep Learning Fitness Exercise Correction Keras](https://github.com/Vollkorn01/Deep-Learning-Fitness-Exercise-Correction-Keras) and [Posture](https://github.com/twixupmysleeve/Posture).
--   [Logo marker](https://www4.flamingtext.com/) for this project.
--   This awesome README template is from [Best README Template](https://github.com/othneildrew/Best-README-Template). ♥
-
-<p align="right">(<a href="#top">back to top</a>)</p>
+[MIT](LICENSE)
