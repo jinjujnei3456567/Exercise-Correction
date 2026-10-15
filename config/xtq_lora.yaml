@@ -1,0 +1,27 @@
+# 哮天犬LoRA微调配置
+# 基于 Qwen2.5-1.5B-Instruct
+
+model_name_or_path: Qwen/Qwen2.5-1.5B-Instruct
+method: lora
+stage: sft
+
+dataset: data/train.jsonl
+template: qwen
+cutoff_len: 1024
+
+output_dir: ./output/xtq-lora
+overwrite_output_dir: true
+
+batch_size: 4
+gradient_accumulation_steps: 4
+learning_rate: 5.0e-5
+num_train_epochs: 3.0
+lr_scheduler_type: cosin
+warmup_ratio: 0.1
+
+lora_rank: 8
+lora_alpha: 16
+lora_dropout: 0.05
+
+save_strategy: epoch
+logging_steps: 10
