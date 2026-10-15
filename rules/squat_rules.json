@@ -1,0 +1,65 @@
+{
+  "exercise": "深蹲 (Squat)",
+  "version": "1.0",
+  "last_updated": "2026-10-15",
+  "reviewers": [
+    "运动科学顾问：待填写",
+    "临床护理医师：待填写"
+  ],
+  "literature_sources": [
+    "Escamilla et al., 2001",
+    "Schoenfeld, 2010"
+  ],
+  "indicators": [
+    {
+      "name": "knee_flexion_angle",
+      "display_name": "膝关节屈曲角",
+      "unit": "度",
+      "safe_range": [[80, 120]],
+      "caution_range": [[120, 135], [60, 80]],
+      "warning_range": [[135, 180], [0, 60]],
+      "injury_risk": "半月板后角挤压、髌股关节压力增大",
+      "description": "深蹲时膝关节的弯曲角度，反映下蹲深度是否合适"
+    },
+    {
+      "name": "knee_ankle_deviation",
+      "display_name": "膝-踝联动偏移",
+      "unit": "度",
+      "safe_range": [[0, 10]],
+      "caution_range": [[10, 20]],
+      "warning_range": [[20, 45]],
+      "injury_risk": "髌股关节综合征、前交叉韧带损伤",
+      "description": "正面视角下，膝盖相对于脚踝的向内/向外偏移程度"
+    },
+    {
+      "name": "trunk_lean_angle",
+      "display_name": "躯干前倾角",
+      "unit": "度",
+      "safe_range": [[30, 50]],
+      "caution_range": [[50, 65], [20, 30]],
+      "warning_range": [[65, 90], [0, 20]],
+      "injury_risk": "腰椎间盘压力增大、下背部劳损",
+      "description": "躯干与垂直方向的夹角，反映弯腰程度"
+    }
+  ],
+  "common_mistakes": [
+    {
+      "name": "膝内扣",
+      "description": "膝盖向内偏移超过10度",
+      "risk": "髌股关节综合征、前交叉韧带损伤",
+      "correction": "膝盖与脚尖方向一致，有意识向外打开"
+    },
+    {
+      "name": "弯腰过度",
+      "description": "躯干前倾超过65度",
+      "risk": "腰椎间盘压力增大",
+      "correction": "挺胸收腹，保持背部挺直，臀部先向后坐"
+    },
+    {
+      "name": "下蹲过浅",
+      "description": "膝关节屈曲小于60度",
+      "risk": "训练效果不足",
+      "correction": "继续下蹲至大腿与地面平行或略低"
+    }
+  ]
+}
